@@ -81,7 +81,8 @@ function ThreadPage() {
 }
 
 function dataUrlToBlob(dataUrl: string): Blob {
-  const [head, body] = dataUrl.split(",");
+  const head = dataUrl.slice(0, dataUrl.indexOf(","));
+  const body = dataUrl.slice(dataUrl.indexOf(",") + 1);
   const mime = head.match(/data:(.*?);/)?.[1] ?? "image/png";
   const binary = atob(body);
   const bytes = new Uint8Array(binary.length);
