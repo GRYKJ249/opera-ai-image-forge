@@ -189,7 +189,10 @@ function Thread({ threadId, initial }: { threadId: string; initial: LoadedThread
     const intent = detectImageRequest(text);
     if (intent.isImage) {
       // Show the user's request in the transcript without calling the text model.
-      sendMessage({ text }, { body: { imageRequest: true } });
+      setMessages((current) => [
+        ...current,
+        { id: crypto.randomUUID(), role: "user", parts: [{ type: "text", text }] },
+      ]);
       void runImageGeneration(intent.prompt, messages.length + 1);
       return;
     }
