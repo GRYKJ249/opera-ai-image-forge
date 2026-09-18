@@ -6,11 +6,11 @@ import { useLang } from "@/lib/i18n";
 type ImageCardProps = {
   prompt: string;
   /** Live preview / final result as a data URL (fresh generations). */
-  dataUrl?: string;
+  dataUrl?: string | undefined;
   /** Storage path for persisted images. */
-  path?: string | null;
+  path?: string | null | undefined;
   status: "loading" | "done" | "error";
-  error?: string;
+  error?: string | undefined;
 };
 
 export function ImageCard({ prompt, dataUrl, path, status, error }: ImageCardProps) {
