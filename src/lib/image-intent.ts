@@ -20,6 +20,8 @@ const EN_PATTERNS: RegExp[] = [
 const AR_PATTERNS: RegExp[] = [
   /(ارسم|إرسم|ارسملي|صمم|صمّم|اصنع|أنشئ|انشئ|ولد|ولّد|وَلِّد|اعمل|أعطني|اعطني|اظهر|أظهر)\s*[^؟?.!]{0,40}(صورة|صوره|رسمة|رسمه|لوحة|تصميم|شعار|خلفية|بوستر|صور)/,
   /(صورة|صوره|رسمة|رسمه|لوحة)\s*(ل|لي|عن|of)?\s*\S+/,
+  // Arabic "draw" verbs on their own already mean "produce a picture".
+  /(^|\s)(ارسم|إرسم|أرسم|ارسملي|ارسمي|رسمة|ريندر)/,
 ];
 
 // Guard: the user is asking about writing code, not for a picture.
