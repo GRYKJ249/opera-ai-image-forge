@@ -97,7 +97,7 @@ function Thread({ threadId, initial }: { threadId: string; initial: LoadedThread
   const [imageTurns, setImageTurns] = useState<ImageTurn[]>(initial.images);
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  const { messages, sendMessage, status, stop } = useChat({
+  const { messages, sendMessage, setMessages, status, stop } = useChat({
     id: threadId,
     messages: initial.messages,
     transport: new DefaultChatTransport({ api: "/api/chat" }),
