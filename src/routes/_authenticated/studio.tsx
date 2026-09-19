@@ -143,7 +143,7 @@ function StudioPage() {
   const randomize = () => {
     const currentIndex = IDEAS.indexOf(prompt);
     const nextIndex = currentIndex >= 0 ? (currentIndex + 1) % IDEAS.length : Math.floor(Math.random() * IDEAS.length);
-    setPrompt(IDEAS[nextIndex] ?? IDEAS[0]);
+    setPrompt(IDEAS[nextIndex] ?? IDEAS[0] ?? "");
   };
 
   const enhance = () => {
@@ -192,12 +192,22 @@ function StudioPage() {
       });
       if (saveError) throw saveError;
       const { data: signed } = await supabase.storage.from("generations").createSignedUrl(path, 60 * 60);
-      setResult({ prompt: basePrompt, status: "done", dataUrl: finalDataUrl, signedUrl: signed?.signedUrl });
+      setResult({
+        prompt: basePrompt,
+        status: "done",
+        dataUrl: finalDataUrl,
+        ...(signed?.signedUrl ? { signedUrl: signed.signedUrl } : {}),
+      });
       await queryClient.invalidateQueries({ queryKey: ["generated-images", user.id] });
       toast.success(t("Image created and saved.", "تم إنشاء الصورة وحفظها."));
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
-      setResult((current) => ({ prompt: current?.prompt ?? basePrompt, dataUrl: current?.dataUrl, status: "error", error: message }));
+      setResult((current) => ({
+        prompt: current?.prompt ?? basePrompt,
+        ...(current?.dataUrl ? { dataUrl: current.dataUrl } : {}),
+        status: "error",
+        error: message,
+      }));
       toast.error(message);
     }
   };
