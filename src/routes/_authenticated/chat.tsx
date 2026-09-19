@@ -1,7 +1,7 @@
 import { createFileRoute, Link, Outlet, useNavigate, useParams } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { MessageSquare, Menu, Plus, Trash2, X, LayoutDashboard } from "lucide-react";
+import { ImageIcon, MessageSquare, Menu, Plus, Trash2, X, LayoutDashboard } from "lucide-react";
 import catAvatar from "@/assets/space-cat-avatar.png";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -130,7 +130,11 @@ function ChatLayout() {
           )}
         </nav>
 
-        <div className="border-t border-glass-border p-3">
+        <div className="space-y-1 border-t border-glass-border p-3">
+          <Link to="/studio" className="btn-ghost w-full justify-center !py-2.5 text-xs">
+            <ImageIcon className="h-4 w-4" />
+            {t("Creative Studio", "الاستوديو الإبداعي")}
+          </Link>
           <Link to="/dashboard" className="btn-ghost w-full justify-center !py-2.5 text-xs">
             <LayoutDashboard className="h-4 w-4" />
             {t("Account", "الحساب")}

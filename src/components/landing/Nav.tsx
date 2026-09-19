@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Contrast, LayoutDashboard, LogIn, Palette, Volume2, VolumeX } from "lucide-react";
+import { Contrast, ImageIcon, LayoutDashboard, LogIn, Palette, Volume2, VolumeX } from "lucide-react";
 import catAvatar from "@/assets/space-cat-avatar.png";
 import { useTheme } from "@/components/theme/ThemeProvider";
 import { useSound } from "@/hooks/use-sound";
@@ -89,10 +89,16 @@ export function Nav() {
             <span className="hidden sm:inline">100 Themes</span>
           </a>
           {session ? (
-            <Link to="/dashboard" onClick={click} className="btn-hero !px-3 !py-2 text-xs md:!px-4">
-              <LayoutDashboard className="h-4 w-4" />
-              <span className="hidden sm:inline">{t("Account", "حسابي")}</span>
-            </Link>
+            <>
+              <Link to="/studio" onClick={click} className="btn-ghost !px-3 !py-2 text-xs md:!px-4">
+                <ImageIcon className="h-4 w-4" />
+                <span className="hidden lg:inline">{t("Studio", "الاستوديو")}</span>
+              </Link>
+              <Link to="/dashboard" onClick={click} className="btn-hero !px-3 !py-2 text-xs md:!px-4">
+                <LayoutDashboard className="h-4 w-4" />
+                <span className="hidden sm:inline">{t("Account", "حسابي")}</span>
+              </Link>
+            </>
           ) : (
             <Link to="/auth" onClick={click} className="btn-hero !px-3 !py-2 text-xs md:!px-4">
               <LogIn className="h-4 w-4" />
