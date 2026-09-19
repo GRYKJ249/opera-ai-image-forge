@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { BadgeCheck, Cpu, Loader2, LogOut, Save, Sparkles } from "lucide-react";
+import { BadgeCheck, Cpu, ImageIcon, Loader2, LogOut, Save, Sparkles } from "lucide-react";
 import catAvatar from "@/assets/space-cat-avatar.png";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -149,7 +149,7 @@ function Dashboard() {
           )}
         </div>
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+        <div className="mt-6 grid gap-4 sm:grid-cols-3">
           <div className="glass rounded-2xl p-6">
             <Cpu className="h-5 w-5 text-primary" />
             <p className="mt-3 text-3xl font-bold">{profile?.tokens_used ?? 0}</p>
@@ -160,6 +160,13 @@ function Dashboard() {
             <p className="mt-3 font-semibold">{t("Chat workspace", "مساحة المحادثة")}</p>
             <p className="text-sm text-muted-foreground">
               {t("Talk to Opera AI with streaming answers and saved conversations.", "تحدّث مع أوبرا الذكي بردود فورية ومحادثات محفوظة.")}
+            </p>
+          </Link>
+          <Link to="/studio" className="glass rounded-2xl p-6 transition hover:border-primary/50">
+            <ImageIcon className="h-5 w-5 text-primary" />
+            <p className="mt-3 font-semibold">{t("Creative Studio", "الاستوديو الإبداعي")}</p>
+            <p className="text-sm text-muted-foreground">
+              {t("Generate original images and revisit your private archive.", "أنشئ صوراً أصلية واستعرض أرشيفك الخاص.")}
             </p>
           </Link>
         </div>

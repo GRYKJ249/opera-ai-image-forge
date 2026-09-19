@@ -11,10 +11,16 @@ export const imageSettings: Omit<ImageConfig, "apiKey"> = {
   format: "openai",
 };
 
-export function generateImage(config: ImageConfig, prompt: string, stream = true, signal?: AbortSignal) {
+export function generateImage(
+  config: ImageConfig,
+  prompt: string,
+  stream = true,
+  signal?: AbortSignal,
+  options?: { size?: string },
+) {
   const input =
     config.format === "openai"
-      ? { prompt, ...(stream ? { partial_images: 1 } : {}) }
+      ? { prompt, ...(options?.size ? { size: options.size } : {}), ...(stream ? { partial_images: 1 } : {}) }
       : config.format === "generate-content"
         ? {
             contents: [{ role: "user", parts: [{ text: prompt }] }],
